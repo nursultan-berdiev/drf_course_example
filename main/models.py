@@ -1,6 +1,7 @@
 from django.db import models
 from account.models import User
-from datetime import timedelta
+from datetime import timedelta, date
+from dateutil.relativedelta import relativedelta
 
 
 class Mentor(models.Model):
@@ -36,5 +37,6 @@ class CourseClass(models.Model):
     end_date = models.DateField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        self.end_date = self.date_start.date() + timedelta(months=self.course.months)
+        if not self.date_start:
+            self.end_date = date.today() + relativedelta(months=self.course.months)
         super(CourseClass, self).save(*args, **kwargs)

@@ -20,7 +20,6 @@ class CourseClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseClass
         fields = "__all__"
-        read_only_fields = ['mentor', ]
 
 
 class CourseSerializer(serializers.ModelSerializer):
